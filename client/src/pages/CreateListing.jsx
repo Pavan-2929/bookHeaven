@@ -102,7 +102,7 @@ const CreateListing = () => {
       setError(false);
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:3000/api/listing/create",
+        "https://bookheaven-server.onrender.com/api/listing/create",
         { ...formData, userRef: currentUser._id },
         { withCredentials: true }
       );

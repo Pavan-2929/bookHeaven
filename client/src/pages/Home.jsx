@@ -18,9 +18,12 @@ const Home = () => {
 
   const getUserData = async () => {
     try {
-      const user = await axios.get("http://localhost:3000/api/user", {
-        withCredentials: true,
-      });
+      const user = await axios.get(
+        "https://bookheaven-server.onrender.com/api/user",
+        {
+          withCredentials: true,
+        }
+      );
       dispatch(setUser(user.data));
       setUserData(user.data);
     } catch (error) {
@@ -43,7 +46,7 @@ const Home = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/user/listings/${currentUser._id}`,
+        `https://bookheaven-server.onrender.com/api/user/listings/${currentUser._id}`,
         { withCredentials: true }
       );
 
@@ -58,7 +61,7 @@ const Home = () => {
   const handleDeleteListing = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/listing/delete/${id}`,
+        `https://bookheaven-server.onrender.com/api/listing/delete/${id}`,
         { withCredentials: true }
       );
       setUserListings((prev) => prev.filter((listing) => listing._id !== id));
@@ -71,7 +74,7 @@ const Home = () => {
   const fetchOfferListings = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/listing/get?offer=true&limit=4`
+        `https://bookheaven-server.onrender.com/api/listing/get?offer=true&limit=4`
       );
 
       setOfferListings(response.data);
@@ -85,7 +88,7 @@ const Home = () => {
   const fetchRentListings = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/listing/get?type=rent&limit=4`
+        `https://bookheaven-server.onrender.com/api/listing/get?type=rent&limit=4`
       );
 
       setRentListings(response.data);
@@ -98,7 +101,7 @@ const Home = () => {
   const fetchSaleListings = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/listing/get?type=sale&limit=4`
+        `https://bookheaven-server.onrender.com/api/listing/get?type=sale&limit=4`
       );
 
       setSaleListings(response.data);

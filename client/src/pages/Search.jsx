@@ -104,7 +104,7 @@ export default function Search() {
         setShowMore(false);
         const searchQuery = urlParams.toString();
         const response = await axios.get(
-          `http://localhost:3000/api/listing/get?${searchQuery}`
+          `https://bookheaven-server.onrender.com/api/listing/get?${searchQuery}`
         );
 
         if (response.data.length > 8) {
@@ -136,7 +136,7 @@ export default function Search() {
     const searchQuery = urlParams.toString();
 
     const response = await axios.get(
-      `http://localhost:3000/api/listing/get?${searchQuery}`
+      `https://bookheaven-server.onrender.com/api/listing/get?${searchQuery}`
     );
 
     if (response.data.length < 9) {

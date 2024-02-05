@@ -10,7 +10,7 @@ const Conatct = ({ listing }) => {
     const fetchLandlordData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/user/${listing.userRef}`,
+          `https://bookheaven-server.onrender.com/api/user/${listing.userRef}`,
           { withCredentials: true }
         );
         if (response.status === 200) {

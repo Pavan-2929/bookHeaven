@@ -103,8 +103,8 @@ const UpdateListing = () => {
       setError(false);
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:3000/api/listing/update/${params.id}`,
-        {...formData, userRef:currentUser._id},
+        `https://bookheaven-server.onrender.com/api/listing/update/${params.id}`,
+        { ...formData, userRef: currentUser._id },
         { withCredentials: true }
       );
       console.log(response);
@@ -165,7 +165,7 @@ const UpdateListing = () => {
     const fetchData = async () => {
       try {
         const listing = await axios.get(
-          `http://localhost:3000/api/listing/get/${params.id}`
+          `https://bookheaven-server.onrender.com/api/listing/get/${params.id}`
         );
         if(listing.status === 200){
           setFormData(listing.data)
@@ -180,7 +180,11 @@ const UpdateListing = () => {
 
   const updateListing = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/listing/update/${params.id}`, formData, {withCredentials:true})
+      const response = await axios.post(
+        `https://bookheaven-server.onrender.com/api/listing/update/${params.id}`,
+        formData,
+        { withCredentials: true }
+      );
       console.log(response);
     } catch (error) {
       console.log(error);

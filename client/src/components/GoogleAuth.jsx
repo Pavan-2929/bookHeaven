@@ -20,7 +20,7 @@ const GoogleAuth = () => {
       const result = await signInWithPopup(auth, provider);
 
       const response = await axios.post(
-        "http://localhost:3000/api/auth/google",
+        "https://bookheaven-server.onrender.com/api/auth/google",
         {
           username: result.user.displayName,
           email: result.user.email,
