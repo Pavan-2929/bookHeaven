@@ -9,6 +9,7 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UpdateListing = () => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -112,6 +113,13 @@ const UpdateListing = () => {
       if (response.status !== 201) {
         setError(response.data.message);
       }
+      toast.success("Updated Successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#282828",
+          color: "#fff",
+        },
+      });
       navigate(`/`);
     } catch (error) {
       setLoading(false);
@@ -318,8 +326,8 @@ const UpdateListing = () => {
                   <input
                     type="number"
                     id="discountPrice"
-                    min="1"
-                    max="10"
+                    min="50"
+                    max="1000000"
                     required
                     className="p-2 border border-gray-300 rounded-lg bg-[#414141] text-sm"
                     onChange={handleChange}
@@ -345,7 +353,7 @@ const UpdateListing = () => {
                 htmlFor="images"
                 className="flex-1 p-3 border border-gray-300 rounded cursor-pointer bg-[#414141] text-white text-center"
               >
-                Select Photos
+                Select Photos ({files.length})
               </label>
               <input
                 className="hidden"

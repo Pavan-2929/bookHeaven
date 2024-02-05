@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,6 +15,7 @@ function Header() {
   const currentUser = useSelector((state) => state.currentUser);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -65,6 +66,25 @@ function Header() {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("searchTerm", searchTerm);
+      const searchQuery = urlParams.toString();
+      navigate(`/search?${searchQuery}`);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searhTermFromUrl = urlParams.get("searchTerm");
+    if (searhTermFromUrl) {
+      setSearchTerm(searhTermFromUrl);
+    }
+  }, [location.search]);
+
   return (
     <nav
       className={`${
@@ -73,22 +93,27 @@ function Header() {
     >
       <div className="md:flex justify-around items-center">
         <div className="text-[2rem] flex justify-around items-center relative">
-          <span className="text-purple-500 animate-fire">BookHeaven</span>
+          <span className="text-purple-700 animate-fire">BookHeaven</span>
           <div onClick={toggleMenu} className="md:hidden">
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </div>
         </div>
 
-        <div className="flex bg-[#444] rounded px-4 py-2 my-5 md:mt-0">
+        <form
+          onSubmit={handleSubmit}
+          className="flex bg-[#444] rounded px-4 py-2 my-5 md:my-0"
+        >
           <input
             type="text"
             className="focus:outline-none bg-transparent w-full sm:max-w-[250px] "
             placeholder="Search..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
           />
-          <button>
+          <button type="submit">
             <FaSearch />
           </button>
-        </div>
+        </form>
 
         <div>
           <ul

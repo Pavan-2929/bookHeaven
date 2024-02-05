@@ -9,6 +9,7 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CreateListing = () => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -111,6 +112,13 @@ const CreateListing = () => {
       if (response.status !== 201) {
         setError(response.data.message);
       }
+      toast.success("List created Successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#282828",
+          color: "#fff",
+        },
+      });
       navigate(`/listing/${response.data._id}`);
     } catch (error) {
       setLoading(false);
@@ -285,7 +293,9 @@ const CreateListing = () => {
                 />
                 <div className="flex flex-col items-center">
                   <p>Regular price</p>
-                  <span className="text-xs">($ / month)</span>
+                  {formData.type === "rent" && (
+                    <span className="text-xs">($ / month)</span>
+                  )}
                 </div>
               </div>
               {formData.offer && (
@@ -293,10 +303,8 @@ const CreateListing = () => {
                   <input
                     type="number"
                     id="discountPrice"
-                    min="1"
-                    max="10"
                     required
-                    className="p-2 border border-gray-300 rounded-lg bg-[#414141] text-sm"
+                    className="p-2 border border-gray-300 rounded-lg bg-[#414141] text-sm w-[6rem]"
                     onChange={handleChange}
                     value={formData.discountPrice}
                   />
@@ -320,7 +328,7 @@ const CreateListing = () => {
                 htmlFor="images"
                 className="flex-1 p-3 border border-gray-300 rounded cursor-pointer bg-[#414141] text-white text-center"
               >
-                Select Photos
+                Select Photos ({files.length})
               </label>
               <input
                 className="hidden"
