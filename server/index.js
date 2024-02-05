@@ -7,7 +7,9 @@ import userRotuer from "./routes/user.routes.js";
 import listingRouter from "./routes/listing.routes.js";
 
 const app = express();
-app.use(cors({credentials: true, origin:"http://localhost:5173"}))
+app.use(
+  cors({ credentials: true, origin: "https://bookheaven-29.onrender.com" })
+);
 app.use(express.json())
 dotenv.config();
 
