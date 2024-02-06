@@ -201,7 +201,7 @@ const Profile = () => {
             type="file"
             ref={fileRef}
             hidden
-            accept="image/*"
+            // accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}
           />
           <img

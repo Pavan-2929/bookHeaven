@@ -363,7 +363,7 @@ const UpdateListing = () => {
                 className="hidden"
                 type="file"
                 id="images"
-                accept="image/*"
+                // accept="image/*"
                 multiple
                 onChange={(e) => setFiles(e.target.files)}
               />
